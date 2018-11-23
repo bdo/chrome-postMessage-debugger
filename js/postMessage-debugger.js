@@ -1,10 +1,11 @@
-var postMessageDebugger = {
-  init: function() {
-    console.log("postMessageDebugger activated");
-    addEventListener("message", function(event) {
-      console.log(document.title + " received '" + event.data + "'")
-    });
-  }
-};
-
-postMessageDebugger.init();
+console.debug("postMessageDebugger activated");
+addEventListener("message", function(event) {
+  console.debug(
+    "postMessage received by '" +
+      document.title +
+      "' from '" +
+      event.origin +
+      "' with data:",
+    event.data
+  );
+});
