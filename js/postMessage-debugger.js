@@ -1,14 +1,16 @@
-var postMessageDebugger = {
-  hashCode: function(s){
-      return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
-  },
-  init: function() {
-    var id = this.hashCode(window.location.href);
-    console.log("[" + id + "] postMessageDebugger activated on " + window.location.href);
-    addEventListener("message", function(event) {
-      console.log("[" + id + "]" + event.data )
-    });
-  }
-};
+function hashCode(s){
+  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
+}
 
-postMessageDebugger.init();
+var id = "[" + this.hashCode(window.location.href) + "]";
+console.debug(id + " postMessageDebugger activated");
+addEventListener("message", function(event) {
+  console.debug(
+    "postMessage received by " +
+      id +
+      " from '" +
+      event.origin +
+      "' with data:",
+    event.data
+  );
+});
